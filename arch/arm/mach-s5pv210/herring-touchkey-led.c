@@ -17,6 +17,7 @@
 #include <linux/earlysuspend.h>
 #include <linux/device.h>
 #include <asm/mach-types.h>
+#include "herring.h"
 
 #ifdef CONFIG_KEYPAD_CYPRESS_TOUCH_USE_BLN
 #include <linux/miscdevice.h>
@@ -222,7 +223,7 @@ static int __init herring_init_touchkey_led(void)
 	int ret = 0;
 	u32 gpio;
 
-	if (!machine_is_herring() || system_rev < 0x10)
+	if (!machine_is_herring() || !herring_is_tft_dev())
 		return 0;
 
 	for (i = 0; i < ARRAY_SIZE(led_gpios); i++) {
